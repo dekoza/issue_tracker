@@ -23,3 +23,11 @@ urlpatterns = [  # bardzo chaotyczna struktura
 ]
 
 # straszny chaos w URLach, spróbuj to uporządkować
+
+# projects/ - lista projektów
+# projects/~add - dodanie projektu
+# projects/<slug> - detale projektu - lista issue w projekcie
+# projects/<slug>/~edit - edycja projektu
+# projects/<slug>/~delete - usunięcie projektu
+# projects/<slug>/~add - dodanie issue
+# projects/<slug>/<issue-slug> - detale issue

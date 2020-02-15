@@ -56,7 +56,7 @@ class DeleteProjectView(DeleteView):
 
 @method_decorator(login_required, name='dispatch')
 class ProjectDetailView(ListView):
-    model = Issue
+    model = Issue  # nie zgadza się model z nazwą klasy
     template_name = 'issues/project_detail.html'
 
     def get_context_data(self, *, object_list=None, **kwargs):
@@ -71,13 +71,17 @@ class ProjectDetailView(ListView):
 
 
 @method_decorator(login_required, name='dispatch')
-class IssueDetailView(TemplateView):
+class IssueDetailView(DetailView):  # DetailView
     model = Issue
     template_name = 'issues/issue.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['issue_detail'] = Issue.objects.get(slug=self.kwargs['slug'])
+        # context['issue_detail'] = Issue.objects.get(slug=self.kwargs['slug'])
+
+        issue = self.get_object()
+        context['comments'] = issue.comments.select_related('author').all()  # propozycja!
+
         return context
 
 
